@@ -8,56 +8,36 @@ const counterControls = document.querySelector('.counter-controls')
 
 counterDisplay.innerText = '0'
 
-// Create the minus, plus and reset buttons
+// Declare function to create the minus, plus and reset buttons
 
-const minusBtn = document.createElement('div')
-minusBtn.classList.add('minus-btn')
-minusBtn.innerText = '-'
-counterControls.appendChild(minusBtn)
+function createBtn(tagName, className, innerText) {
+    var element = document.createElement(tagName)
+    element.classList.add(className)
+    element.innerText = innerText
+    counterControls.appendChild(element)
+}
 
-const plusBtn = document.createElement('div')
-plusBtn.classList.add('plus-btn')
-plusBtn.innerText = '+'
-counterControls.appendChild(plusBtn)
+// Create individual buttons
 
-const resetBtn = document.createElement('div')
-resetBtn.classList.add('reset-btn')
-resetBtn.innerText = 'reset'
-counterControls.appendChild(resetBtn)
+createBtn('div', 'minus-btn', '-')
+createBtn('div', 'plus-btn', '+')
+createBtn('div', 'reset-btn', 'reset')
 
 // Initialize the counter variable to 0
 
 let count = 0
 
-// Create functions to decrease, increase and reset the counter
+// Create eventListeners from the parent component
 
-function countDown() {
-    if (count !== 0) {  // Prevents the counter from going below 0
-        count--
-    } 
-}
-
-function countUp() {
-    count++
-}
-
-function reset() {
-    count = 0
-}
-
-// Create the event listeners for when each button is clicked
-
-minusBtn.addEventListener('click', () => {
-    countDown()
-    counterDisplay.textContent = count
-})
-
-plusBtn.addEventListener('click', () => {
-    countUp()
-    counterDisplay.textContent = count
-})
-
-resetBtn.addEventListener('click', () => {
-    reset()
-    counterDisplay.textContent = count
+counterControls.addEventListener('click', (e) => {
+    if (e.target.innerText === '-') {
+        if (count !== 0) {  // Prevents the counter from going below 0
+            count--
+        }
+    } else if (e.target.innerText === '+') {
+        count++
+    } else if (e.target.innerText === 'reset') {
+        count = 0
+    }
+    counterDisplay.innerText = count
 })
