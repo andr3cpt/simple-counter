@@ -11,7 +11,7 @@ counterDisplay.innerText = '0'
 // Declare function to create the minus, plus and reset buttons
 
 function createBtn(tagName, className, innerText) {
-    var element = document.createElement(tagName)
+    const element = document.createElement(tagName)
     element.classList.add(className)
     element.innerText = innerText
     counterControls.appendChild(element)
